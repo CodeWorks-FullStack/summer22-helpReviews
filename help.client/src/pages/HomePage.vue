@@ -1,17 +1,37 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="row">
+    <div class="col-md-12 my-3" v-for="r in restaurants" :key="r.id">
+     <RestaurantCard :restaurant="r"/>
     </div>
   </div>
 </template>
 
 <script>
+import { computed, onMounted } from '@vue/runtime-core';
+import { logger } from '../utils/Logger';
+import { restaurantsService} from "../services/RestaurantsService"
+import { AppState } from '../AppState';
+import RestaurantCard from '../components/RestaurantCard.vue';
+
 export default {
-  name: 'Home'
+    name: "Home",
+    setup() {
+        async function getRestaurants() {
+            try {
+                await restaurantsService.getRestaurants();
+            }
+            catch (error) {
+                logger.log(error);
+            }
+        }
+        onMounted(() => {
+            getRestaurants();
+        });
+        return {
+            restaurants: computed(() => AppState.restaurants)
+        };
+    },
+    components: { RestaurantCard }
 }
 </script>
 
