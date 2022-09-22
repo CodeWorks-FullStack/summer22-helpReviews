@@ -26,6 +26,7 @@ namespace help.Controllers
       try
       {
         Account user = await HttpContext.GetUserInfoAsync<Account>();
+        reportData.CreatorId = user.Id;
         Report report = _reportsService.Create(reportData);
         report.Creator = user;
         return Ok(report);
