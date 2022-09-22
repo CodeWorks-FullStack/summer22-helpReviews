@@ -36,7 +36,7 @@ VALUES
 INSERT INTO restaurants
 (name, imgUrl, creatorId, description)
 VALUES
-('Krusty Krab', 'https://i.pinimg.com/600x315/7b/24/d0/7b24d09ad1f0494ac14e4eef47a533b0.jpg', '6216b36ebc31a249987812b1', 'No this is Patrick.');
+('Wild Dog Doggies', 'https://www.boredpanda.com/blog/wp-content/uploads/2020/11/raccoons-hot-dogs-james-blackwood-nova-scotia-coverimage.jpg', '632cc248c1fe0f9df71b9d4d', "We specialize in hot dogs for wild dogs.  We are a charity Restaurant and do not want anyone to give us a bad rating cause they expected us to feed their hugry kids after they got all hopped up on some 'white bottle' 'candies' some guy named Miles hanging outside the Big B Cheese.");
 
 SELECT
 rest.*,
@@ -68,7 +68,7 @@ GROUP BY(rest.id)
     GROUP BY(rest.id)
     ORDER BY rest.exposure desc;
 
-
+-- NOTE special thing for this project and resetting exposures
 -- NOTE to enable events
 SET GLOBAL event_scheduler = on;
 
