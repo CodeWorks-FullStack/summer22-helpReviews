@@ -4,6 +4,7 @@
 <p>{{report.body}}</p>
 <p>{{report.rating}}</p>
 <p>{{report.creator.name}}</p>
+<img :src="report.creator.picture" alt="">
    </div>
 </template>
 <script>

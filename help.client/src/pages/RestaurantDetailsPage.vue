@@ -34,7 +34,7 @@ import { AppState } from '../AppState';
 import { logger } from '../utils/Logger';
 import { restaurantsService } from '../services/RestaurantsService';
 import { reportsService} from '../services/ReportsService'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { onMounted } from '@vue/runtime-core';
 import ReportCard from '../components/ReportCard.vue';
 import Pop from '../utils/Pop';
@@ -42,6 +42,7 @@ export default {
     setup() {
         const editable = ref({})
         const route = useRoute();
+        const router = useRouter();
         async function getActiveRestaurant() {
             try {
                 if (!AppState.activeRestaurant) {
@@ -50,6 +51,7 @@ export default {
             }
             catch (error) {
                 logger.log(error);
+                router.push({name: 'Home'})
             }
         }
         async function getReports() {
@@ -77,7 +79,7 @@ export default {
             },
             async shutdownRestaurant() {
                 try {
-                    AppState.activeRestaurant.shutdown = !AppState.activeRestaurant.shutdow
+                    AppState.activeRestaurant.shutdown = !AppState.activeRestaurant.shutdown
                     await restaurantsService.shutdownRestaurant(AppState.activeRestaurant)
                     Pop.toast(`<img class="img-fluid" src="https://gifimage.net/wp-content/uploads/2018/11/gordon-ramsay-shut-it-down-gif-4.gif"/>`)
     } catch (error) {
